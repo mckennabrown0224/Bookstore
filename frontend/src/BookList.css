@@ -1,0 +1,79 @@
+/* BookList.css */
+
+/* Container for the book cards */
+.book-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem; /* Adjust spacing between cards */
+    justify-content: center; /* Center the cards horizontally */
+    box-sizing: border-box; /* Ensure padding is included in the height calculation */
+    width: 100%; /* Ensure the container takes up the full width of the parent */
+    margin-left: auto; /* Center the container horizontally by setting left margin to auto */
+    margin-right: auto; /* Center the container horizontally by setting right margin to auto */
+  }
+  
+  /* Individual book card styling */
+  .book-card {
+    width: 300px; /* Fixed width for all cards */
+    height: 300px; /* Fixed height for all cards to maintain a square */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space between elements */
+    background-color: #fff;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden; /* Hide anything that exceeds the bounds of the card */
+  }
+  
+  /* Title styling with ellipsis */
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    white-space: nowrap; /* Prevent the title from wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
+    width: 100%; /* Ensure the text stays within the bounds of the container */
+    cursor: pointer; /* Indicate to users they can hover */
+  }
+  
+  /* Card text values with ellipsis */
+  .list-unstyled li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    white-space: nowrap; /* Prevent the text from wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
+    width: 100%; /* Ensure the text stays within the bounds of the container */
+    cursor: pointer; /* Indicate to users they can hover */
+  }
+  
+  /* Hover effect to show full text on mouse hover */
+  .card-title:hover,
+  .list-unstyled li:hover {
+    text-overflow: clip; /* Remove the ellipsis on hover */
+    white-space: normal; /* Allow the text to wrap */
+    background-color: #f8f9fa; /* Optional background color on hover */
+  }
+  
+  /* Pagination styling */
+  .pagination {
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .pagination button {
+    margin: 0 5px;
+  }
+  
+  /* Style for results per page dropdown */
+  .form-select {
+    width: auto;
+    display: inline-block;
+    margin-left: 10px;
+  }
+  
+  
+  
