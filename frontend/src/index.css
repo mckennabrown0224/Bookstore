@@ -24,17 +24,32 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  min-width: 100vw; /* ✅ Ensure full width */
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Ensure Bootstrap grid works properly */
+.container,
+.container-fluid {
+  max-width: 100%;
+  padding: 0 15px;
 }
 
+/* Fix row alignment issues */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Ensure columns span correctly */
+.col-md-9,
+.col-md-3 {
+  max-width: 100%;
+  flex-grow: 1;
+}
+
+/* Button Styling */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -66,3 +81,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+

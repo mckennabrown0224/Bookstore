@@ -1,0 +1,136 @@
+/* Shopping Cart Container */
+.shopping-cart-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Shopping Cart Title */
+.shopping-cart-title {
+  text-align: center;
+  font-size: 2rem; /* Adjusted for consistency with the rest of the page */
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Individual Cart Item */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+/* Cart Item Info */
+.cart-item-info {
+  text-align: left;
+  max-width: 70%;
+  position: relative;
+}
+
+.cart-item-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.cart-item-author {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+/* Cart Item Buttons */
+.cart-item-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Remove Button (Bad Button) */
+.cart-item-buttons .bad-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cart-item-buttons .bad-button:hover {
+  background-color: #c82333;
+}
+
+/* Checkout, Clear Cart, and Continue Browsing Buttons */
+.checkout-button,
+.clear-button,
+.browse-button {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  width: 100%;
+  margin: 10px 5px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.checkout-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.checkout-button:hover {
+  background-color: #218838;
+}
+
+.clear-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.clear-button:hover {
+  background-color: #c82333;
+}
+
+.browse-button {
+  background-color: #ffc107;
+  color: black;
+}
+
+.browse-button:hover {
+  background-color: #e0a800;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-item-info {
+    max-width: 100%;
+  }
+
+  .cart-item-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .checkout-button,
+  .clear-button,
+  .browse-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
