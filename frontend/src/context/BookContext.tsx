@@ -1,5 +1,12 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { Book } from "../types/Book";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { Book } from '../types/Book';
+import { fetchBooks } from '../api/BooksAPI';
 
 interface BookContextType {
   books: Book[];
@@ -12,6 +19,7 @@ interface BookContextType {
   setPageSize: (size: number) => void;
   setPageNum: (num: number) => void;
   setIsSorted: (sorted: boolean) => void;
+  setBooks: (books: Book[]) => void;
 }
 
 const BookContext = createContext<BookContextType | undefined>(undefined);
@@ -23,29 +31,34 @@ export const BookProvider = ({ children }: { children: ReactNode }) => {
   const [pageNum, setPageNum] = useState<number>(1);
   const [isSorted, setIsSorted] = useState<boolean>(false);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      const categoryParams = selectedCategories
-        .map((cat) => `bookTypes=${encodeURIComponent(cat)}`)
-        .join("&");
-      const apiURL = `https://localhost:5269/api/Bookstore/GetAllBooks?pageSize=${pageSize}&pageNum=${pageNum}&isSorted=${isSorted}${
-        selectedCategories.length ? `&${categoryParams}` : ""
-      }`;
-
+    const loadBooks = async () => {
       try {
-        const response = await fetch(apiURL, { credentials: "include" });
-        if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
-        const data = await response.json();
+        setLoading(true);
+        const data = await fetchBooks(
+          pageSize,
+          pageNum,
+          selectedCategories,
+          isSorted
+        );
+
         setBooks(data.books);
         setTotalPages(Math.max(Math.ceil(data.numBooks / pageSize), 1));
       } catch (error) {
-        console.error("Error fetching books: ", error);
+        setError((error as Error).message);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchBooks();
+    loadBooks();
   }, [pageSize, pageNum, isSorted, selectedCategories]);
+
+  if (loading) return <p>Loading Books...</p>;
+  if (error) return <p className="text-red-500">Error: {error}</p>;
 
   return (
     <BookContext.Provider
@@ -60,6 +73,7 @@ export const BookProvider = ({ children }: { children: ReactNode }) => {
         setPageSize,
         setPageNum,
         setIsSorted,
+        setBooks,
       }}
     >
       {children}
@@ -70,7 +84,8 @@ export const BookProvider = ({ children }: { children: ReactNode }) => {
 export const useBooks = () => {
   const context = useContext(BookContext);
   if (!context) {
-    throw new Error("useBooks must be used within a BookProvider");
+    throw new Error('useBooks must be used within a BookProvider');
   }
   return context;
 };
+

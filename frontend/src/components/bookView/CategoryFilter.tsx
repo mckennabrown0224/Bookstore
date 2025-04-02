@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useBooks } from "../../context/BookContext";
-import "../../style/CategoryFilter.css";
+import { useEffect, useState } from 'react';
+import { useBooks } from '../../context/BookContext';
+import '../../style/CategoryFilter.css';
 
 function CategoryFilter() {
   const { selectedCategories, setSelectedCategories } = useBooks(); // ✅ Use context instead of props
@@ -10,19 +10,20 @@ function CategoryFilter() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("https://localhost:5269/api/Bookstore/GetBookCategories");
+        const response = await fetch(
+          'https://mbrown-bookstoreproject-backend.azurewebsites.net/api/Bookstore/GetBookCategories'
+        );
         const data = await response.json();
-        console.log("Fetched categories: ", data);
+        console.log('Fetched categories: ', data);
 
         setCategories(data);
-        setSelectedCategories(data); // ✅ Initialize selected categories using context
       } catch (error) {
-        console.error("Error fetching categories", error);
+        console.error('Error fetching categories', error);
       }
     };
 
     fetchCategories();
-  }, [setSelectedCategories]); // Dependency array ensures this effect runs only once
+  }, []); // Dependency array ensures this effect runs only once
 
   // Handle checkbox selection changes
   function handleCheckboxChange({ target }: { target: HTMLInputElement }) {
@@ -35,7 +36,7 @@ function CategoryFilter() {
 
   return (
     <div className="category-filter">
-      <h5>Project Types:</h5>
+      <h5>Book Categories:</h5>
       <div className="category-list">
         {categories.map((c) => (
           <div key={c} className="category-item">
@@ -56,4 +57,3 @@ function CategoryFilter() {
 }
 
 export default CategoryFilter;
-

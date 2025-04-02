@@ -4,11 +4,11 @@ import BookList from '../components/bookView/BookList';
 import CategoryFilter from '../components/bookView/CategoryFilter';
 import ResultsPerPageDropdown from '../components/bookView/ResultsPerPageDropdown';
 import SortCheckbox from '../components/bookView/SortCheckbox';
-import PaginationControls from '../components/bookView/PaginationControls';
+import PaginationControls from '../components/bookView/Pagination';
 import CartSummary from '../components/bookView/ShoppingCartSummary';
 
 function BooksPage() {
-  useBooks();
+  const { books, pageNum, totalPages, pageSize, setPageNum, setPageSize } = useBooks();
 
   return (
     <div className="container mt-4">
@@ -22,7 +22,13 @@ function BooksPage() {
               <CategoryFilter />
             </div>
             <div className="mb-3">
-              <ResultsPerPageDropdown />
+              <ResultsPerPageDropdown 
+                pageSize={pageSize} 
+                onPageSizeChange={(newSize) => {
+                  setPageSize(newSize);
+                  setPageNum(1); // Reset to page 1 when changing results per page
+                }} 
+              />
             </div>
             <div>
               <SortCheckbox />
@@ -32,9 +38,13 @@ function BooksPage() {
 
         {/* Main Content */}
         <div className="col-md-9">
-          <BookList />
+          <BookList books={books} /> {/* Pass only books */}
           <div className="d-flex justify-content-center mt-3">
-            <PaginationControls />
+            <PaginationControls 
+              currentPage={pageNum}
+              totalPages={totalPages}
+              onPageChange={setPageNum} // Handle page change
+            />
           </div>
         </div>
       </div>

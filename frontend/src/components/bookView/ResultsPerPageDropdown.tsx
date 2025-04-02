@@ -1,16 +1,16 @@
-import { useBooks } from "../../context/BookContext";
+interface ResultsPerPageProps {
+  pageSize: number;
+  onPageSizeChange: (newSize: number) => void;
+}
 
-const ResultsPerPageDropdown = () => {
-  const { pageSize, setPageSize, setPageNum } = useBooks(); // ✅ Use context instead of props
-
+const ResultsPerPageDropdown = ({ pageSize, onPageSizeChange }: ResultsPerPageProps) => {
   return (
     <div className="d-flex align-items-center mt-3">
       <label className="me-2">Results per page:</label>
       <select
         value={pageSize}
         onChange={(e) => {
-          setPageSize(Number(e.target.value));
-          setPageNum(1); // ✅ Reset to first page when changing page size
+          onPageSizeChange(Number(e.target.value));
         }}
         className="form-select w-auto d-inline-block"
       >

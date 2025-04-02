@@ -1,11 +1,13 @@
-import { useBooks } from "../../context/BookContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../style/BookList.css";
 import BookCard from "./BookCard";
+import { Book } from "../../types/Book";
 
-const BookList = () => {
-  const { books } = useBooks();
+interface BookListProps {
+  books: Book[];
+}
 
+const BookList = ({ books }: BookListProps) => {
   return (
     <div className="container">
       <div className="row book-cards-container">
