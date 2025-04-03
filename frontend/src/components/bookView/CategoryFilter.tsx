@@ -11,7 +11,7 @@ function CategoryFilter() {
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          'https://mbrown-bookstoreproject-backend.azurewebsites.net/api/Bookstore/GetBookCategories'
+          'https://bookstore-mbrown-backend.azurewebsites.net/api/Bookstore/GetBookCategories'
         );
         const data = await response.json();
         console.log('Fetched categories: ', data);
