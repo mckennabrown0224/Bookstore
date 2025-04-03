@@ -7,7 +7,7 @@ import PaginationControls from '../components/bookView/Pagination';
 import AdminBookView from '../components/adminBookView/AdminBookView';
 
 function AdminBooksPage() {
-  const { books, pageNum, totalPages, pageSize, setPageNum, setPageSize } = useBooks();
+  const { pageNum, totalPages, pageSize, setPageNum, setPageSize } = useBooks();
 
   return (
     <div className="container mt-4">

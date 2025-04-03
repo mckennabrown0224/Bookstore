@@ -6,32 +6,23 @@ import { deleteBook, fetchBooks } from '../../api/BooksAPI';
 import UpdateBookForm from './UpdateBookForm'; // Ensure this path is correct
 
 const AdminBookView = () => {
-  const {
-    books,
-    pageNum,
-    totalPages,
-    pageSize,
-    setPageNum,
-    setPageSize,
-    isSorted,
-    selectedCategories,
-    setBooks,
-  } = useBooks();
+  const { books, pageNum, pageSize, isSorted, setBooks } = useBooks();
   const [showForm, setShowForm] = useState(false);
   const [updatingBook, setUpdatingBook] = useState<Book | null>(null);
 
   const handleDelete = async (bookId: number) => {
-    const confirmDelete = window.confirm('Are you sure you want to delete this book?');
+    const confirmDelete = window.confirm(
+      'Are you sure you want to delete this book?'
+    );
     if (!confirmDelete) return;
 
     try {
-        await deleteBook(bookId);
-        setBooks(books.filter((b) => b.bookId !== bookId))
+      await deleteBook(bookId);
+      setBooks(books.filter((b) => b.bookId !== bookId));
     } catch (error) {
-        alert('Failed to delete book. Please try again.');
+      alert('Failed to delete book. Please try again.');
     }
   };
-
 
   if (!books.length) return <p>No books found.</p>;
 
@@ -100,7 +91,7 @@ const AdminBookView = () => {
               <td>{b.pageCount}</td>
               <td>{b.price}</td>
               <td>
-              <button
+                <button
                   className="btn btn-primary btn-sm w-100 mb-1"
                   onClick={() => setUpdatingBook(b)}
                 >
