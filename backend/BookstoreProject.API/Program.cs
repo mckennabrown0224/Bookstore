@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173").AllowCredentials().AllowAnyHeader().AllowAnyMethod();
+            policy.WithOrigins("http://localhost:5173", "https://witty-flower-0f8f6061e.6.azurestaticapps.net").AllowCredentials().AllowAnyHeader().AllowAnyMethod();
         }
     );
 });
